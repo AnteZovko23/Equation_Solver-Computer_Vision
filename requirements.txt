@@ -8,7 +8,6 @@ protobuf==3.19.1
 
 
 
-tensorflow==2.7.0
 
 tf-estimator-nightly==2.9.0.dev2022010409
 tf-nightly==2.9.0.dev20220104
