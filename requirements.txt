@@ -164,4 +164,3 @@ webencodings==0.5.1
 Werkzeug==2.0.1
 wrangle==0.6.9
 wrapt==1.12.1
-zope.interface==4.7.1
