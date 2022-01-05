@@ -9,7 +9,6 @@ protobuf==3.19.1
 
 
 
-tf-estimator-nightly==2.9.0.dev2022010409
 tf-nightly==2.9.0.dev20220104
 
 tornado==6.1
