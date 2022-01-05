@@ -22,7 +22,6 @@ dbus-python==1.2.16
 decorator==4.4.2
 deluge==2.0.3
 distro==1.4.0
-distro-info===0.23ubuntu1
 docutils==0.16
 entrypoints==0.3
 evdev==1.3.0
