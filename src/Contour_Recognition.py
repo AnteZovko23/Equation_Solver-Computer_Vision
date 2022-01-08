@@ -9,8 +9,11 @@ export the individual detected contours as images
 """
 
 
-def start(image_path='../Picture_Upload_Service/Image/expression.jpg'):
+def start(image_path):
     # Import image
+    # img = image
+
+    # Save image on disk
     img = cv2.imread(image_path)
 
     # Read as grayscale,(Creates CV_8UC1 single channel image and the bounding rectangles can only be
@@ -19,7 +22,6 @@ def start(image_path='../Picture_Upload_Service/Image/expression.jpg'):
 
     retval, threshold = cv2.threshold(img_gray, 127, 255, cv2.THRESH_BINARY)
     contours, hierarchy = cv2.findContours(threshold, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-
     # Draw contours test
     # cv2.drawContours(Image, contours, -1, (0, 255, 255), 3)
 
@@ -30,7 +32,7 @@ def start(image_path='../Picture_Upload_Service/Image/expression.jpg'):
     for contour in contours:
         x, y, w, h = cv2.boundingRect(contour)
         # Eliminate noise by checking if contour is large enough
-        if w > 40 and h > 15:
+        if w > 85 and h > 10:
             contour_list.append([x, y, w, h])
 
     # Sort contours by x position
@@ -44,12 +46,9 @@ def start(image_path='../Picture_Upload_Service/Image/expression.jpg'):
         if image_counter == 0:
             pass
         else:
+            # cv2.imwrite('../Detected_Images/' + str(image_counter) + '.jpg', threshold[y:y + h, x:x + w])
             cv2.imwrite('../Detected_Images/' + str(image_counter) + '.jpg', threshold[y:y + h, x:x + w])
         image_counter += 1
-
-
-if __name__ == '__main__':
-    start()
 
 # Display countours
 # cv2.drawContours(Image, contours, -1, (0, 255, 255), 3)

@@ -1,0 +1,103 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+<!--    <title>Image Uploader</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<form method = "post" action = "/" enctype="multipart/form-data" accept-charset="">-->
+<!--<input type = 'file' name = 'imgFile'>-->
+<!--<input type = 'submit' value = 'upload'>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+        <title>Equation Solver</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <!-- CSS -->
+        <style>
+
+            * {
+                font-size: 30px;
+            }
+
+        </style>
+
+</head>
+<body>
+            <input name="upload" id="image-selector" type="file">
+            <button id="process-button">Process</button>
+        <p style="font-weight: bold;">Expression</p>
+        <p>Expression: <span id="expression"></span></p>
+        <p>Result: <span id="result"></span></p>
+        <img id="image-output" src="">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+
+        let base64Image;
+
+        $("#image-selector").change(function() {
+
+            let reader = new FileReader();
+            reader.onload = function() {
+                let dataURL = reader.result;
+
+                // Convert to base64
+                $("#image-output").attr("src", dataURL);
+                //base64Image = dataURL.replace("data:image/png;base64,", "");
+                base64Image = dataURL.split(",")[1];
+            };
+            reader.readAsDataURL($("#image-selector")[0].files[0]);
+            $("#expression").text("");
+            $("#result").text("");
+        });
+
+        $("#process-button").click(function(event) {
+            var imgVal = $('#image-selector').val();
+            let message = {
+                image: base64Image
+            }
+            if(imgVal=='')
+            {
+                alert("empty input file");
+                return false;
+            } else {
+                $.ajax({
+                    url: "http://100.86.5.165:5000/process",
+                    type: "POST",
+                    data: JSON.stringify(message),
+                    success: function(data) {
+                        $("#expression").text(data.expression);
+                        $("#result").text(data.result);
+                    },
+                    error: function(data) {
+                        alert("error");
+                    }
+                });
+            }
+            /* let message = {
+                image: base64Image
+            }
+            $.post("http://100.86.5.165:5000/process", JSON.stringify(message), function(response) {
+                $("#expression").text(response.expression);
+                $("#result").text(response.result);
+            }); */
+
+        })
+
+
+
+
+</script>
+</body>
+
+</html>

@@ -77,12 +77,17 @@ def classify(model):
         return result
 
     image_list = []
+    counter = 0
     # Load in the images
+    # Load images from the directory in increasing order of the name of each file
+
     for filepath in sorted(os.listdir('../Detected_Images/')):
+        print(sorted(os.listdir('../Detected_Images/')))
         given_image = cv2.imread('../Detected_Images/{0}'.format(filepath), 0)
         resized_image = cv2.resize(given_image, (45, 45))
         image_array = np.expand_dims(resized_image, axis=0)
         image_list.append(image_array)
+        counter += 1
 
     expression = []
     evaluated_expression = ""
