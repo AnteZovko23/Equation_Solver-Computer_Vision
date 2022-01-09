@@ -4,13 +4,13 @@ import io
 import sys
 import os
 
-sys.path.insert(0, '../')
+sys.path.insert(0, '/')
 from src import Contour_Recognition
 from Tensorflow import Classification
 
 import tensorflow as tf
 from flask import Flask, request, jsonify, render_template
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import cv2
 
 """
@@ -22,16 +22,18 @@ Backend server with Flask and Tensorflow
 
 app = Flask(__name__)
 
-cors = CORS(app)
+CORS(app, support_credentials=True)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-@app.route('/home')
+@app.route('/')
+@cross_origin(origin='*')
 def home():
     return render_template('index.html')
 
 
 @app.route("/process", methods=["POST"])
+@cross_origin(origin='*')
 def post():
     # get the image from the request
     message = request.get_json(force=True)
@@ -46,9 +48,9 @@ def post():
     # Resize the image to a smaller size
     image = cv2.resize(image, (1920, 1080))
     # Save
-    cv2.imwrite("./Image/image.jpeg", image)
+    cv2.imwrite("Image/image.png", image)
 
-    expression = start_recognition("./Image/image.jpeg").split(" ")
+    expression = start_recognition("Image/image.png").split(" ")
 
     response = {
 
@@ -62,9 +64,13 @@ def post():
 
 def start_recognition(image_path, model_path='./templates/saved_model_2/saved_model/my_model'):
     # delete all files in the Image folder
-    for file in os.listdir("../Detected_Images"):
-        os.remove(os.path.join("../Detected_Images", file))
+    for file in os.listdir("Detected_Images"):
+        os.remove(os.path.join("Detected_Images", file))
 
     Contour_Recognition.start(image_path)
 
     return Classification.classify(tf.keras.models.load_model(model_path))
+
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5000)

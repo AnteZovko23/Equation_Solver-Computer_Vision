@@ -57,16 +57,16 @@ def classify(model):
                 if input_string[character + 1] in ['+', '-', 'x', '/']:
                     continue
                 next_value = get_next_number(input_string[character + 1: len(input_string)])
-                if input_string[character] == '+':
-                    result += next_value
-
-                elif input_string[character] == '-':
-                    result -= next_value
-
-                elif input_string[character] == 'x':
+                if input_string[character] == '*':
                     result *= next_value
+
                 elif input_string[character] == '/':
                     result /= next_value
+
+                elif input_string[character] == '+':
+                    result += next_value
+                elif input_string[character] == '-':
+                    result -= next_value
 
             elif input_string[character] in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]:
                 continue
@@ -81,9 +81,8 @@ def classify(model):
     # Load in the images
     # Load images from the directory in increasing order of the name of each file
 
-    for filepath in sorted(os.listdir('../Detected_Images/')):
-        print(sorted(os.listdir('../Detected_Images/')))
-        given_image = cv2.imread('../Detected_Images/{0}'.format(filepath), 0)
+    for filepath in sorted(os.listdir('./Detected_Images/')):
+        given_image = cv2.imread('./Detected_Images/{0}'.format(filepath), 0)
         resized_image = cv2.resize(given_image, (45, 45))
         image_array = np.expand_dims(resized_image, axis=0)
         image_list.append(image_array)
@@ -92,6 +91,8 @@ def classify(model):
     expression = []
     evaluated_expression = ""
     # Classify the images
+    print("\n")
+    print("-------------------------------------------------------")
     for image in image_list:
         prediction = model.predict(image)
         expression.append(label_dictionary[np.argmax(prediction)])
@@ -101,6 +102,8 @@ def classify(model):
     print("\n")
 
     print("Result: {}".format(evaluate_expression(expression)))
+    print("-------------------------------------------------------")
+    print("\n")
     evaluated_expression += " Result: {}".format(evaluate_expression(expression))
 
     return evaluated_expression
