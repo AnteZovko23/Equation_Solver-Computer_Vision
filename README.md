@@ -109,6 +109,7 @@ The number of images for each class varies significantly which is why the model 
 <br>
 
 ![image info](./Plots/Dataset_Distribution.png)
+
 <p><b>Figure 1:</b> This figure shows the number of images for each dataset.
 
 As can be seen, the number of images for each class is significantly different. "Number 2" has a very high number of images which is why, during testing, the that number sems to work best with the model
@@ -207,19 +208,24 @@ In this section, I will show some metrics recorded while training and testing th
 
 
 <h4>Accuracy</h4>
+
 ![Model Accuracy and Loss](./Plots/categorical_accuracy.png)
+
 <p><b>Figure 2:</b> This figure shows the accuracy vs epoch plot
 <h4>Precision and Recall</h4>
 
 ![Model Precision](./Plots/precision.png)
 ![Model Recall](./Plots/recall.png)
+
 <p><b>Figure 3:</b> This figure shows the precision and recall vs epoch plot
 
 <br>
 <br>
 
 <h4>Confusion Matrix</h4>
+
 ![Conf Matrix](./Plots/confusion_matrix.png)
+
 <p><b>Figure 4:</b> This figure shows the confusion matrix
 <br><b>NOTE: </b> The numbers in the matrix correspond to the index of these items:
 <pre>
