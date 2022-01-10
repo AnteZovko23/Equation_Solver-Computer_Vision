@@ -59,8 +59,7 @@ http://localhost:5000/
 </pre>
     
   <p>To test if the server is running correctly: </p>
-    
-    <pre>
+<pre>
     
     // This command should produce something similar to the following output
     docker ps
@@ -98,7 +97,7 @@ http://localhost:5000/
     172.17.0.1 - - [10/Jan/2022 00:02:45] "POST //process HTTP/1.1" 200 -
 
     
-    </pre>
+ </pre>
 
 <h3><li>Using the local machine (With Server)</li></h3>
 
