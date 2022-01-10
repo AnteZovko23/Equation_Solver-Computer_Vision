@@ -57,6 +57,48 @@ http://localhost:5000/
 // Upload an image
 
 </pre>
+    
+    <p>To test if the server is running correctly</p>
+    
+    <pre>
+    
+    // This command should produce something similar to the following output
+    docker ps
+    
+    CONTAINER ID   IMAGE                         COMMAND            CREATED         STATUS         PORTS                                       NAMES
+    41ef1b8ec36e   zovkoante23/equation-solver   "python3 app.py"   6 minutes ago   Up 6 minutes   0.0.0.0:5000->5000/tcp, :::5000->5000/tcp  xenodochial_brattain
+
+    // Using the CONTAINER ID with the following command will produce useful logs of the app execution
+    docker logs 41ef1b8ec36e
+    
+    
+      2022-01-10 00:01:18.900257: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror:        libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/lib/python3.8/site-packages/cv2/../../lib64:
+    2022-01-10 00:01:18.900317: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+     * Serving Flask app 'app' (lazy loading)
+     * Environment: production
+       WARNING: This is a development server. Do not use it in a production deployment.
+       Use a production WSGI server instead.
+     * Debug mode: on
+     * Running on all addresses.
+       WARNING: This is a development server. Do not use it in a production deployment.
+     * Running on http://172.17.0.2:5000/ (Press CTRL+C to quit)
+     * Restarting with stat
+    2022-01-10 00:01:21.674852: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/lib/python3.8/site-packages/cv2/../../lib64:/usr/local/lib/python3.8/site-packages/cv2/../../lib64:
+    2022-01-10 00:01:21.674887: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+     * Debugger is active!
+     * Debugger PIN: 541-175-557
+    172.17.0.1 - - [10/Jan/2022 00:02:30] "GET / HTTP/1.1" 200 -
+    172.17.0.1 - - [10/Jan/2022 00:02:30] "GET /favicon.ico HTTP/1.1" 404 -
+    172.17.0.1 - - [10/Jan/2022 00:02:33] "GET / HTTP/1.1" 200 -
+    2022-01-10 00:02:44.808933: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/lib/python3.8/site-packages/cv2/../../lib64:/usr/local/lib/python3.8/site-packages/cv2/../../lib64:
+    2022-01-10 00:02:44.808973: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+    2022-01-10 00:02:44.808994: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (41ef1b8ec36e): /proc/driver/nvidia/version does not exist
+    2022-01-10 00:02:44.809217: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+    To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+    172.17.0.1 - - [10/Jan/2022 00:02:45] "POST //process HTTP/1.1" 200 -
+
+    
+    </pre>
 
 <h3><li>Using the local machine (With Server)</li></h3>
 
