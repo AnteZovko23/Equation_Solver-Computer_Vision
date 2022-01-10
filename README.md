@@ -55,10 +55,10 @@ docker run -d -p 5000:5000 zovkoante23/equation-solver
 http://localhost:5000/
 
 // Upload an image
-
+  
 </pre>
     
-    <p>To test if the server is running correctly</p>
+  <p>To test if the server is running correctly: </p>
     
     <pre>
     
